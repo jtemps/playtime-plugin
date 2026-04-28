@@ -30,27 +30,39 @@ Tracks what landed and what didn't. Gets better over time.
 
 ## How to install
 
-The plugin ships with a marketplace manifest (`.claude-plugin/marketplace.json`) so it installs through Claude Code's standard plugin workflow.
+Playtime works in any Claude Code surface — the desktop app, the terminal CLI, the web app, or the IDE extensions. It ships with a marketplace manifest (`.claude-plugin/marketplace.json`) so it installs through Claude Code's standard plugin workflow.
 
-### From a local clone
+For a parent-friendly walkthrough (with the recommended desktop-app path), see **[dailyplaytime.com/install](https://dailyplaytime.com/install)**.
+
+### From inside Claude Code
+
+In a Claude Code session (desktop app's Code tab, `claude` in your terminal, or claude.ai/code on the web), type these two slash commands:
+
+```
+/plugin marketplace add jtemps/playtime-plugin
+/plugin install playtime@playtime-marketplace
+```
+
+That's it. To verify the plugin loaded, type `/plugin` to open the plugin manager.
+
+### From a local clone (developer mode)
+
+If you want to hack on the plugin locally:
 
 ```bash
-# Clone
 git clone https://github.com/jtemps/playtime-plugin.git ~/playtime-plugin
+```
 
-# Add the local marketplace
-claude plugin marketplace add ~/playtime-plugin
+Then in a Claude Code session:
 
-# Install the plugin
-claude plugin install playtime@playtime-marketplace
-
-# Verify
-claude plugin list
+```
+/plugin marketplace add ~/playtime-plugin
+/plugin install playtime@playtime-marketplace
 ```
 
 ### Once installed
 
-Restart Claude Code (or run `/reload-plugins`) and verify the slash commands show up:
+The slash commands show up:
 
 ```
 /playtime:setup-playtime
@@ -67,11 +79,13 @@ Run `/playtime:setup-playtime` to begin.
 
 ### Updating
 
-```bash
-cd ~/playtime-plugin
-git pull
-claude plugin marketplace update playtime-marketplace
+In a Claude Code session:
+
 ```
+/plugin marketplace update playtime-marketplace
+```
+
+(If you installed from a local clone, run `git pull` in `~/playtime-plugin` first.)
 
 ## How state works
 
