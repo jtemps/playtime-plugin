@@ -1,0 +1,25 @@
+{
+  "name": "playtime-marketplace",
+  "owner": {
+    "name": "Julian Tempelsman",
+    "url": "https://dailyplaytime.com"
+  },
+  "metadata": {
+    "description": "Playtime — generate delightful, personalized morning activity packets for kids",
+    "pluginRoot": "./",
+    "website": "https://dailyplaytime.com"
+  },
+  "plugins": [
+    {
+      "name": "playtime",
+      "source": "./",
+      "description": "Generate delightful, personalized morning activity packets for kids — connect-the-dots, mad libs, stories, mazes, crafts, science, and more. Tracks what each kid loves so packets get better over time.",
+      "version": "0.1.0",
+      "homepage": "https://dailyplaytime.com",
+      "author": {
+        "name": "Julian Tempelsman",
+        "url": "https://dailyplaytime.com"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "playtime",
+  "version": "0.1.0",
+  "description": "Generate delightful, personalized morning activity packets for kids — connect-the-dots, mad libs, stories, mazes, crafts, science, and more. Tracks what each kid loves so packets get better over time.",
+  "author": {
+    "name": "Julian Tempelsman"
+  },
+  "license": "MIT",
+  "keywords": ["kids", "activities", "parenting", "education", "learning", "crafts", "homeschool"]
+}

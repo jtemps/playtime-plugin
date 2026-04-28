@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{KID_NAME}} · {{DATE}} · Playtime</title>
+  <style>
+    /* ======== Page setup ======== */
+    @page {
+      size: {{PAPER_SIZE}}; /* "letter" or "A4" */
+      margin: 0.5in;
+    }
+
+    @media print {
+      html, body { background: #fff; }
+      .grownup details { /* always print expanded */
+        display: block;
+      }
+      .grownup details summary { display: none; }
+      .grownup details > *:not(summary) { display: block !important; }
+      .screen-only { display: none !important; }
+    }
+
+    /* ======== Reset ======== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+      color: #1a1a1a;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ======== Color modes ======== */
+    .packet.color-color { --accent: {{ACCENT_HEX}}; }
+    .packet.color-bw    { --accent: #1a1a1a; }
+
+    /* ======== Layout ======== */
+    .packet {
+      max-width: 7.5in; /* fits inside 0.5" margins on letter */
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* ======== Header / greeting ======== */
+    .hello {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--accent);
+      padding: 0.1in 0 0.08in;
+      margin-bottom: 0.2in;
+    }
+    .greeting {
+      font-family: "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .meta {
+      font-size: 12px;
+      color: #555;
+      letter-spacing: 0.02em;
+    }
+
+    /* ======== Main activity ======== */
+    .activity {
+      page-break-inside: avoid;
+    }
+    .title {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 0.08in;
+      letter-spacing: -0.005em;
+    }
+    .instruction {
+      font-size: 15px;
+      margin: 0 0 0.18in;
+      color: #333;
+      max-width: 6.5in;
+    }
+    .content {
+      margin: 0.1in 0;
+    }
+    .content svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ======== Extras (small bonuses) ======== */
+    .extras {
+      margin-top: 0.25in;
+      padding-top: 0.12in;
+      border-top: 1px dashed #ccc;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.2in;
+      page-break-inside: avoid;
+    }
+    .extras .item {
+      font-size: 13px;
+    }
+    .extras .item h3 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.04in;
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+
+    /* ======== Grown-up footer ======== */
+    .grownup {
+      margin-top: 0.35in;
+      padding-top: 0.15in;
+      border-top: 1px solid #ddd;
+    }
+    .grownup details {
+      font-size: 11px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .grownup details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #444;
+      list-style: none;
+      margin-bottom: 0.05in;
+    }
+    .grownup p { margin: 0.04in 0; }
+    .fineprint {
+      margin-top: 0.15in;
+      font-size: 9px;
+      color: #999;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    /* ======== Decorative borders / motifs ======== */
+    .frame {
+      border: 1.5px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.15in;
+    }
+
+    /* ======== Drawing area ======== */
+    .draw-here {
+      border: 2px dashed var(--accent);
+      border-radius: 8px;
+      min-height: 3in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-style: italic;
+      font-size: 12px;
+    }
+
+    /* ======== Form-fill blanks ======== */
+    .blank {
+      display: inline-block;
+      border-bottom: 1.5px solid #333;
+      min-width: 1.5in;
+      height: 18px;
+    }
+
+    /* ======== Checkbox ======== */
+    .check {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #333;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main class="packet {{COLOR_MODE_CLASS}}"> <!-- "color-color" or "color-bw" -->
+    <header class="hello">
+      <div class="greeting">{{GREETING}}</div>
+      <div class="meta">{{WEEKDAY}} · {{DATE_LONG}} · {{WEATHER_EMOJI}}</div>
+    </header>
+
+    <section class="activity">
+      <h1 class="title">{{TITLE}}</h1>
+      <p class="instruction">{{INSTRUCTION}}</p>
+      <div class="content">
+        {{ACTIVITY_CONTENT}}
+      </div>
+      {{EXTRAS_BLOCK}}
+    </section>
+
+    <footer class="grownup">
+      <details open>
+        <summary>For grown-ups</summary>
+        <p><strong>Materials:</strong> {{MATERIALS}}</p>
+        <p><strong>Time:</strong> ~{{TIME_ESTIMATE}}</p>
+        <p><strong>Building:</strong> {{LEARNING_GOALS_HIT}}</p>
+        {{FRAMEWORK_NOTE}}
+        <p><strong>Extension:</strong> {{EXTENSION}}</p>
+      </details>
+      <p class="fineprint">✨ Playtime · dailyplaytime.com · {{DATE}} · {{KID_ID}} · #{{ACTIVITY_ID}}</p>
+    </footer>
+  </main>
+</body>
+</html>

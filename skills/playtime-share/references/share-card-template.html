@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@600;700&display=swap");
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: {{BG_COLOR}};
+    font-family: "Nunito", system-ui, sans-serif;
+    color: #2A2A40;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .frame {
+    position: absolute;
+    inset: 60px;
+    background: white;
+    border: 6px solid #2A2A40;
+    border-radius: 48px;
+    box-shadow: 18px 18px 0 #2A2A40;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .who {
+    font-family: "Fredoka", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: -1.5px;
+    line-height: 1;
+  }
+
+  .age {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #FF8FA3;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .date {
+    font-family: "Fredoka", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    text-align: right;
+    opacity: 0.7;
+    line-height: 1.3;
+  }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .activity-emoji {
+    font-size: 180px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .headline {
+    font-family: "Fredoka", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 76px;
+    letter-spacing: -2.5px;
+    line-height: 1.05;
+    margin-bottom: 28px;
+  }
+
+  .headline .accent {
+    background: #FFE56C;
+    padding: 0 18px;
+    border-radius: 18px;
+    display: inline-block;
+    transform: rotate(-1.2deg);
+  }
+
+  .caption {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.4;
+    opacity: 0.8;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 2px dashed rgba(42, 42, 64, 0.2);
+  }
+
+  .theme-tag {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2A2A40;
+    opacity: 0.7;
+  }
+
+  .credit {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .credit .balloon { font-size: 22px; vertical-align: middle; }
+
+  /* Decorative emoji corners */
+  .deco {
+    position: absolute;
+    font-size: 90px;
+    opacity: 0.85;
+  }
+  .deco.tl { top: 100px; left: 100px; transform: rotate(-12deg); }
+  .deco.tr { top: 100px; right: 100px; transform: rotate(8deg); }
+  .deco.bl { bottom: 100px; left: 100px; transform: rotate(6deg); }
+  .deco.br { bottom: 100px; right: 100px; transform: rotate(-10deg); }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <div>
+        <div class="who">{{KID_NAME}}</div>
+        <div class="age">{{KID_AGE}}</div>
+      </div>
+      <div class="date">{{DATE_PRETTY}}</div>
+    </div>
+
+    <div class="body">
+      <div class="activity-emoji">{{ACTIVITY_EMOJI}}</div>
+      <div class="headline">{{HEADLINE_LINE_1}}<br><span class="accent">{{HEADLINE_LINE_2}}</span></div>
+      <div class="caption">{{CAPTION}}</div>
+    </div>
+
+    <div class="footer">
+      <div class="theme-tag">{{THEME_TAG}}</div>
+      <div class="credit">made with <span class="balloon">🎈</span> Playtime</div>
+    </div>
+  </div>
+</body>
+</html>

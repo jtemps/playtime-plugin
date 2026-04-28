@@ -1,0 +1,16 @@
+# Generated state lives in ~/.playtime/, never inside the repo.
+# But just in case anyone does `cp -r` it in, ignore it:
+.playtime/
+playtime-state/
+state/
+
+# OS / editor cruft
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Node / misc (in case anyone adds tooling later)
+node_modules/
+*.log
