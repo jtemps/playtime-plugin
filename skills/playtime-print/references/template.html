@@ -19,6 +19,32 @@
       .grownup details summary { display: none; }
       .grownup details > *:not(summary) { display: block !important; }
       .screen-only { display: none !important; }
+      /* Parent notes print on their own sheet — kid keeps page 1 clean. */
+      .grownup { page-break-before: always; break-before: page; padding-top: 0; }
+      .page-break-hint { display: none !important; }
+    }
+    /* Visible hint on screen that the grown-up notes will print as page 2. */
+    .page-break-hint {
+      margin: 0.3in 0 0.1in;
+      text-align: center;
+      font-size: 10px;
+      color: #aaa;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .page-break-hint span {
+      display: inline-block;
+      padding: 0 0.12in;
+      background: #fff;
+      position: relative;
+      top: -7px;
+    }
+    .page-break-hint::before {
+      content: "";
+      display: block;
+      border-top: 1px dashed #ddd;
+      width: 100%;
+      margin-bottom: -7px;
     }
 
     /* ======== Reset ======== */
@@ -178,6 +204,35 @@
       margin-right: 6px;
     }
   </style>
+  <script>
+    // Shrink-to-fit: only runs when content overflows the kid page. No-op otherwise.
+    (function () {
+      var PAPER = '{{PAPER_SIZE}}';
+      function fit() {
+        var main = document.querySelector('main.packet');
+        if (!main) return;
+        main.style.zoom = '';
+        var grownup = main.querySelector('.grownup');
+        var kidHeight = grownup ? grownup.offsetTop : main.offsetHeight;
+        var pageIn = (PAPER || '').toLowerCase() === 'a4' ? 11.69 : 11;
+        var availPx = (pageIn - 1) * 96; // 0.5in top + 0.5in bottom margins
+        if (kidHeight > availPx) {
+          main.style.zoom = (availPx / kidHeight).toFixed(4);
+        }
+      }
+      function reset() {
+        var main = document.querySelector('main.packet');
+        if (main) main.style.zoom = '';
+      }
+      window.addEventListener('beforeprint', fit);
+      window.addEventListener('afterprint', reset);
+      // Safari / some PDF pipelines fire matchMedia instead of beforeprint
+      if (window.matchMedia) {
+        var mq = window.matchMedia('print');
+        if (mq.addEventListener) mq.addEventListener('change', function (e) { e.matches ? fit() : reset(); });
+      }
+    })();
+  </script>
 </head>
 <body>
   <main class="packet {{COLOR_MODE_CLASS}}"> <!-- "color-color" or "color-bw" -->
@@ -194,6 +249,8 @@
       </div>
       {{EXTRAS_BLOCK}}
     </section>
+
+    <div class="page-break-hint" aria-hidden="true"><span>↓ For grown-ups · prints on page 2</span></div>
 
     <footer class="grownup">
       <details open>
